@@ -19,8 +19,11 @@
             </span>
             <span v-on:mousemove.stop="" style="background: palevioletred; margin-left: 20px;">
                     DEAD SPOT 2
-                </span>
-            </p>
+            </span>
+        </p>
+        <p>
+            <input type="text" v-on:keyup.space.enter.ж="alertMe">
+        </p>
     </div>
 </body>
 <script>
@@ -44,6 +47,9 @@ new Vue({
       },
       dummy: function(event) {
           event.stopPropagation();
+      },
+      alertMe: function() {
+          alert('Alert!');
       }
   }
 });
