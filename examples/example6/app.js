@@ -3,6 +3,14 @@ window.addEventListener("load", function(event) {
         el: '#app',
         data : {
             attachRed: false
+        },
+        computed: {
+            divClasses: function() {
+                return {
+                    red: this.attachRed,
+                    blue: !this.attachRed
+                };
+            }
         }
     });
 });
