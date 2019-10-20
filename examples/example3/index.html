@@ -9,7 +9,7 @@
 </head>
 <body>
     <div id="app">
-        <button v-on:click="increase">Plus</button>
+        <button v-on:click="increase(2, $event)">Plus</button>
         <button v-on:click="decrease">Munis</button>
         <p>{{ counter }}</p>
         <p style="background: palegoldenrod" v-on:mousemove="updateCoordinates">Coordinates: {{x}} / {{y}}</p>
@@ -24,8 +24,8 @@ new Vue({
       y: 0
   },
   methods: {
-      increase: function() {
-          this.counter++;
+      increase: function(step, event) {
+          this.counter += step;
       },
       decrease: function() {
           this.counter--;
