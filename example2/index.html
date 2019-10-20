@@ -14,7 +14,8 @@
       </div>
       
       <div id="app2">
-        <p>{{ title }} {{ sayHello() }} </p>
+        <h1 v-once>{{ title }}</h1>
+        <p> {{ sayHello() }} </p>
       </div>
 </body>
 <script>
@@ -38,7 +39,8 @@ new Vue({
   },
   methods: {
     sayHello: function() {
-      return 'Hello!';
+      this.title = 'Hello!';
+      return this.title;
     }
   }
 });
