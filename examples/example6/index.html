@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Example5</title>
+    <title>Example6</title>
     <script src="../../dist/vue.js"></script>
     <script src="./app.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
-    <button @click="changeLink">Click to change link</button>
-    <a :href="link">The best OS</a>
+    <div class="demo" @click="attachRed = !attachRed" :class="{red: attachRed}"></div>
+    <div class="demo" :class="{red: attachRed}"></div>
+    <div class="demo"></div>
 </div>
 </body>
 </html>
