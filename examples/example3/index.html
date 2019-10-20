@@ -24,6 +24,10 @@
         <p>
             <input type="text" v-on:keyup.space.enter.ж="alertMe">
         </p>
+        <p>
+            <input type="text" name="name" v-model="name">
+        </p>
+        <p>{{ name }}</p>
     </div>
 </body>
 <script>
@@ -32,7 +36,8 @@ new Vue({
   data: {
       counter: 0,
       x: 0,
-      y: 0
+      y: 0,
+      name: 'Jumbo'
   },
   methods: {
       increase: function(step, event) {
