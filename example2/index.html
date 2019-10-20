@@ -11,6 +11,8 @@
     <div id="app">
         <input type="text" v-on:input="changeTitle">
         <p>{{ title }} - <a v-bind:href="link">Udemy</a></p>
+        <hr/>
+        <p v-html="finishedLink"></p>
       </div>
       
       <div id="app2">
@@ -23,7 +25,8 @@
   el: '#app',
   data: {
     title: 'Hello world!',
-    link: 'http://udemy.com'
+    link: 'http://udemy.com',
+    finishedLink: '<a href="http://debian.org">Debian</a>'
   },
   methods: {
       changeTitle: function(event) {
