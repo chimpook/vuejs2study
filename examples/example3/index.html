@@ -12,7 +12,15 @@
         <button v-on:click="increase(2, $event)">Plus</button>
         <button v-on:click="decrease">Munis</button>
         <p>{{ counter }}</p>
-        <p style="background: palegoldenrod" v-on:mousemove="updateCoordinates">Coordinates: {{x}} / {{y}}</p>
+        <p v-on:mousemove="updateCoordinates" style="background: palegoldenrod">
+            Coordinates: {{x}} / {{y}}
+            <span v-on:mousemove="dummy" style="background: palevioletred;">
+                DEAD SPOT 1
+            </span>
+            <span v-on:mousemove.stop="" style="background: palevioletred; margin-left: 20px;">
+                    DEAD SPOT 2
+                </span>
+            </p>
     </div>
 </body>
 <script>
@@ -33,6 +41,9 @@ new Vue({
       updateCoordinates: function(event) {
           this.x = event.clientX;
           this.y = event.clientY;
+      },
+      dummy: function(event) {
+          event.stopPropagation();
       }
   }
 });
