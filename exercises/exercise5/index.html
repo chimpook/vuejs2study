@@ -42,7 +42,7 @@
         (hint: use v-for and v-if to achieve this) -->
     <ul>
         <li v-for="element in testData">
-            <template v-if="element.length > 0">
+            <template v-if="Array.isArray(element)">
                 <ul>
                     <li v-for="value in element">
                         {{ value }}
