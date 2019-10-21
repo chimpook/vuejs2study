@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Example7</title>
+    <script src="../../dist/vue.js"></script>
+    <script src="./app.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+    <div id="app">
+        <p v-if="show">You can see me!</p>
+        <p v-else="show">Now you can see me</p>
+        <p>Do you also see me?</p>
+        <button @click="show = !show">Switch</button>
+    </div>
+</div>
+</body>
+</html>
