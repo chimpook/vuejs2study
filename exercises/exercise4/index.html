@@ -11,33 +11,46 @@
 </head>
 <body>
 <div id="exercise">
-<!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" or "shrink" class on each new setInterval tick (attach respective class to the div with id "effect" below) -->
+<!-- 1) Start the Effect with the Button. The Effect should alternate the "highlight" 
+    or "shrink" class on each new setInterval tick 
+    (attach respective class to the div with id "effect" below) -->
 <div>
     <button @click="startEffect">Start Effect</button>
-    <div id="effect"></div>
+    <button @click="stopEffect">Stop Effect</button>
+    <div id="effect" :class="effectClass"></div>
 </div>
 <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
-<div>I got no class :(</div>
+<div :class="[myClassShape, myClassColor, myClassForm]">I've got classes :)</div>
 <!-- 3) Let the user enter a class (create some example classes) and attach it -->
 <div>
-    <input type="text">
-    <div></div>
+    <p>
+        For example: highlight, shrink, square, curved, goldenrod<br/>
+        Classes: <input type="text" v-model="myClass">
+    </p>
+    <div :class="myClass"></div>
 </div>
-<!-- 4) Let the user enter a class and enter true/ false for another class (create some example classes) and attach the classes -->
+<!-- 4) Let the user enter a class and enter true/ false for another class 
+    (create some example classes) and attach the classes -->
 <div>
-    <input type="text">
-    <input type="text">
-    <div></div>
+    Classes: <input type="text" v-model="myClass2">
+    Rounded corners: <input type="checkbox" v-model="roundedFlag">
+    <div :class="[myClass2, rounded]"></div>
 </div>
-<!-- 5) Repeat 3) but now with values for styles (instead of class names). Attach the respective styles.  -->
+<!-- 5) Repeat 3) but now with values for styles (instead of class names). 
+    Attach the respective styles.  -->
 <div>
-    <input type="text">
-    <div></div>
+    Size: <input type="text" v-model="mySize">
+    <div :style="myStyle"></div>
 </div>
-<!-- 6) Create a simple progress bar with setInterval and style bindings. Start it by hitting the below button. -->
+<!-- 6) Create a simple progress bar with setInterval and style bindings. 
+    Start it by hitting the below button. -->
 <div>
-    <button>Start Progress</button>
-    <div></div>
+    <button @click="progressStart">Start Progress</button>
+    <button @click="progressStop">Stop Progress</button>
+    <button @click="progressReset">Reset Progress</button>
+    <div class="progressContainer" :style="progressSetStyle">
+        <div class="progressScale" :style="progressSetValue">{{ progressMessage }}</div>
+    </div> 
 </div>
 </div>
 </body>

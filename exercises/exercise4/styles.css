@@ -2,6 +2,7 @@
     width: 100px;
     height: 100px;
     border: 1px solid black;
+    margin: 12px;
 }
   
 .highlight {
@@ -12,4 +13,35 @@
 .shrink {
     background-color: gray;
     width: 50px !important;
+}
+
+.square {
+    height: 86px;
+    width: 86px;
+    padding: 8px;
+    margin: 12px;
+}
+
+.curved {
+    border-radius: 10px;
+}
+
+.goldenrod {
+    background-color: goldenrod;
+}
+
+.progressContainer {
+    margin: 12px;
+    border: 4px solid indigo;
+    background-color: white;
+}
+
+.progressScale {
+    height: 100%;
+    background: indianred;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 24px;
+    font-weight: bold;
+    color: indigo;
 }
