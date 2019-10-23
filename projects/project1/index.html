@@ -67,18 +67,18 @@
     </div>
     <div class="row justify-content-md-center">
         <div class="control col" v-if="inGame">
-                <button type="button" class="btn btn-danger">Attack</button>
-                <button type="button" class="btn btn-warning">Special attack</button>
-                <button type="button" class="btn btn-success">Heal</button>
-                <button type="button" class="btn btn-info">Use shield</button>
-                <button type="button" class="btn btn-secondary" @click="endGame">Give up</button>
+                <button type="button" class="btn btn-danger" @click="heroAttack" :disabled="buttonsDisable.attack">Attack</button>
+                <button type="button" class="btn btn-warning" @click="heroSpecialAttack" :disabled="buttonsDisable.specialAttack">Special attack</button>
+                <button type="button" class="btn btn-success" @click="heroHeal" :disabled="buttonsDisable.heal">Heal</button>
+                <button type="button" class="btn btn-info" @click="heroUseShield" :disabled="buttonsDisable.useShield">Use shield</button>
+                <button type="button" class="btn btn-secondary" @click="giveUp" :disabled="buttonsDisable.giveUp">Give up</button>
         </div>
         <div class="control col" v-else>
                 <button type="button" class="btn btn-success" @click="startGame">Start new game</button>
         </div>
     </div>
     <div class="row justify-content-md-center">
-        <div class="logs col">
+        <div id="logs" class="logs col">
             <div class="row" v-for="log in logs">
                 <div class="col">
                     <div v-if="log.side === 'hero'" class="alert alert-success">
