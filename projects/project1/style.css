@@ -10,6 +10,10 @@
     vertical-align: middle;
 }
 
+.status .progress {
+    margin-bottom: 2px;
+}
+
 .health {
     background-color: lightcoral;
 }
@@ -41,8 +45,22 @@
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
+.control button+button {
+    margin-left: 4px;
+}
+
 .progress {
     text-align: center;
     vertical-align: middle;
     font-weight: bold;
+}
+
+.logs {
+    border: 1px solid lightgrey;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 18px;
+    border-radius: 4px;
+    margin: 4px 0 4px 0;
 }

@@ -12,19 +12,39 @@ window.addEventListener("load", function(event) {
                 name: 'Shelob',
                 health: 100,
                 energy: 100
-            }
+            },
+            logs: [
+            ]
         },
         methods: {
             startGame: function() {
                 this.inGame = true;
+                var vm = this;
+
+                vm.logs.push({
+                    side: 'hero',
+                    message: vm.wrapName(vm.hero.name)
+                        + ' is preparing to the battle...'
+                });
+                setTimeout(function() {
+                    vm.logs.push({
+                        side: 'monster',
+                        message: vm.wrapName(vm.monster.name)
+                            + ' is looking around...'
+                    });
+                }, 1000);
             },
             endGame: function() {
                 this.hero.health = 100;
                 this.hero.energy = 100;
                 this.monster.health = 100;
                 this.monster.energy = 100;
+                this.logs = [];
                 this.inGame = false;
-            }
+            },
+            wrapName: function(name) {
+                return '<span class="name">' + name + '</span>';
+            },
         },
         computed: {
             heroHealth: function() {
@@ -36,6 +56,9 @@ window.addEventListener("load", function(event) {
                 return {
                     width: this.hero.energy + '%'
                 };
+            },
+            logClass: function(side) {
+                return 'alert alert-primary';
             }
         }
     });
