@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project1</title>
+    <script src="../../dist/vue.js"></script>
+    <script src="./app.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app" class="container">
+    <div class="row justify-content-md-center">
+        <div class="status col col-lg-2" v-model="hero">
+            <div class="label">
+                Hero: <span class="name">{{ hero.name }}</span>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="progress">
+                        <div class="progress-bar health" :style="heroHealth">
+                                {{ hero.health }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="progress">
+                        <div class="progress-bar energy" :style="heroEnergy">
+                                {{ hero.energy }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="status col col-lg-2">
+            <div class="label" v-model="monster">
+                Monster: <span class="name">{{ monster.name }}</span>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="progress">
+                        <div class="progress-bar health" :style="{width: monster.health + '%'}">
+                            {{ monster.health }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="progress">
+                        <div class="progress-bar energy" :style="{width: monster.energy + '%'}">
+                                {{ monster.energy }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="control col" v-if="inGame">
+                <button type="button" class="btn btn-danger">Attack</button>
+                <button type="button" class="btn btn-warning">Special attack</button>
+                <button type="button" class="btn btn-success">Heal</button>
+                <button type="button" class="btn btn-info">Use shield</button>
+                <button type="button" class="btn btn-secondary" @click="endGame">Give up</button>
+        </div>
+        <div class="control col" v-else>
+                <button type="button" class="btn btn-success" @click="startGame">Start new game</button>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="log col">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

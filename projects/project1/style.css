@@ -1,0 +1,48 @@
+.container {
+    margin-top: 10px;
+}
+
+.status {
+    background-color: whitesmoke;
+    /*border: 2px solid lightgoldenrodyellow;*/
+    margin: 2px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.health {
+    background-color: lightcoral;
+}
+
+.energy {
+    background-color: lightskyblue;
+}
+
+.scale {
+    background: lightgray;
+    width: 100%;
+}
+
+.name {
+    font-weight: bolder;
+}
+
+.control {
+    border: 1px solid lightgrey;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    vertical-align: middle;
+    padding: 18px;
+    border-radius: 4px;
+    margin: 4px 0 4px 0;
+}
+
+.control button {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.progress {
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+}
