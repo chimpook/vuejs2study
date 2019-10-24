@@ -96,8 +96,8 @@ window.addEventListener("load", function(event) {
                     });
                     this.hero.health += this.potion.health;
                     this.hero.energy += this.potion.energy;
+                    this.monsterAction();
                 }
-                this.monsterAction();
             },
             heroUseShield: function() {
                 if (this.inBattle) {
@@ -150,29 +150,13 @@ window.addEventListener("load", function(event) {
                 if (this.inBattle) {
                     var vm = this;
                     vm.pauseActions();
-                    console.log(vm.buttonsBackup.attack);
-                    console.log(vm.buttonsBackup.specialAttack);
-                    console.log(vm.buttonsBackup.heal);
-                    console.log(vm.buttonsBackup.useShield);
-
-                    console.log('pause');
-                    console.log(vm.buttonsDisable.attack);
-                    console.log(vm.buttonsDisable.specialAttack);
-                    console.log(vm.buttonsDisable.heal);
-                    console.log(vm.buttonsDisable.useShield);
-
                     setTimeout(function() {
                         if (vm.monster.energy >= vm.monster.consumptionHit) {
                             vm.monsterAttack();
                         } else {
                             vm.monsterRest();
                         }
-                        console.log('recover');
-                        console.log(vm.buttonsBackup.attack);
-                        console.log(vm.buttonsBackup.specialAttack);
-                        console.log(vm.buttonsBackup.heal);
-                        console.log(vm.buttonsBackup.useShield);
-                            vm.resumeActions();
+                        vm.resumeActions();
                     }, vm.speed);
                 }
             },
@@ -206,6 +190,7 @@ window.addEventListener("load", function(event) {
             giveUp: function() {
                 this.hero.health = 100;
                 this.hero.energy = 100;
+                this.hero.potions = 3;
                 this.monster.health = 100;
                 this.monster.energy = 100;
                 this.logs = [];
@@ -247,9 +232,9 @@ window.addEventListener("load", function(event) {
                     this.logs.unshift({
                         side: 'hero',
                         message: this.wrapName(this.hero.name)
-                            + ' won the battle!!!'
+                            + ' won the battle!!! '
                             + this.wrapName(this.monster.name)
-                            + ' was defeated!'
+                            + ' was defeated! '
                     });
                     this.monster.health = 0;
                 } else {
@@ -258,7 +243,7 @@ window.addEventListener("load", function(event) {
                         message: this.wrapName(this.hero.name)
                             + ' was defeated... '
                             + this.wrapName(this.monster.name) 
-                            + ' won the battle...'
+                            + ' won the battle... '
                     });
                     this.hero.health = 0;
                 }
@@ -369,8 +354,12 @@ window.addEventListener("load", function(event) {
             },
             'hero.potions': function(value) {
                 var vm = this;
-                if (!value) {
-                    vm.buttonsDisable.heal = true;
+                if (value === 0) {
+                    if (vm.buttonsPaused) {
+                        vm.buttonsBackup.heal = true;
+                    } else {
+                        vm.buttonsDisable.heal = true;
+                    }
                 }
             }
         }
