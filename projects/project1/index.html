@@ -14,56 +14,41 @@
 <body>
 <div id="app" class="container">
     <div class="row justify-content-md-center">
-        <div class="status col col-lg-2" v-model="hero">
+        <div class="status col" v-model="hero">
             <div class="label">
                 <template v-if="winner === 'monster'"><strike>Hero: <span class="name">{{ hero.name }}</span></strike></template>
                 <template v-else>Hero: <span class="name">{{ hero.name }}</span></template>
-                <span v-if="inBattle">in Battle</span>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-danger health" :style="heroHealth">
-                                {{ hero.health }}
-                        </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger health" :style="heroHealth">
+                        {{ hero.health }}
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-info energy" :style="heroEnergy">
-                                {{ hero.energy }}
-                        </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info energy" :style="heroEnergy">
+                        {{ hero.energy }}
                     </div>
                 </div>
+    
             </div>
         </div>
-        <div class="status col col-lg-2">
+        <div class="status col">
             <div class="row">
                 <div class="col">
                     <div class="label" v-model="monster">
-                            <template v-if="winner === 'hero'"><strike>Monster: <span class="name">{{ monster.name }}</span></strike></template>
-                            <template v-else>Monster: <span class="name">{{ monster.name }}</span></template>
+                        <template v-if="winner === 'hero'"><strike>Monster: <span class="name">{{ monster.name }}</span></strike></template>
+                        <template v-else>Monster: <span class="name">{{ monster.name }}</span></template>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
                     <div class="progress">
                         <div class="progress-bar health" :style="{width: monster.health + '%'}">
                             {{ monster.health }}
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
                     <div class="progress">
                         <div class="progress-bar energy" :style="{width: monster.energy + '%'}">
-                                {{ monster.energy }}
+                            {{ monster.energy }}
                         </div>
                     </div>
+            
                 </div>
             </div>
         </div>
