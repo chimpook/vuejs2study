@@ -6,7 +6,15 @@ window.addEventListener("load", function(event) {
             inBattle: false,
             winner: 'none',
             speed: 1000,
+            buttonsPaused: false,
             buttonsDisable: {
+                attack: false,
+                specialAttack: false,
+                heal: false,
+                useShield: false,
+                giveUp: false
+            },
+            buttonsBackup: {
                 attack: false,
                 specialAttack: false,
                 heal: false,
@@ -141,12 +149,30 @@ window.addEventListener("load", function(event) {
             monsterAction: function() {
                 if (this.inBattle) {
                     var vm = this;
+                    vm.pauseActions();
+                    console.log(vm.buttonsBackup.attack);
+                    console.log(vm.buttonsBackup.specialAttack);
+                    console.log(vm.buttonsBackup.heal);
+                    console.log(vm.buttonsBackup.useShield);
+
+                    console.log('pause');
+                    console.log(vm.buttonsDisable.attack);
+                    console.log(vm.buttonsDisable.specialAttack);
+                    console.log(vm.buttonsDisable.heal);
+                    console.log(vm.buttonsDisable.useShield);
+
                     setTimeout(function() {
                         if (vm.monster.energy >= vm.monster.consumptionHit) {
                             vm.monsterAttack();
                         } else {
                             vm.monsterRest();
                         }
+                        console.log('recover');
+                        console.log(vm.buttonsBackup.attack);
+                        console.log(vm.buttonsBackup.specialAttack);
+                        console.log(vm.buttonsBackup.heal);
+                        console.log(vm.buttonsBackup.useShield);
+                            vm.resumeActions();
                     }, vm.speed);
                 }
             },
@@ -198,6 +224,21 @@ window.addEventListener("load", function(event) {
                 this.buttonsDisable.specialAttack = true;
                 this.buttonsDisable.heal = true;
                 this.buttonsDisable.useShield = true;
+            },
+            pauseActions: function() {
+                this.buttonsBackup.attack = this.buttonsDisable.attack;
+                this.buttonsBackup.specialAttack = this.buttonsDisable.specialAttack;
+                this.buttonsBackup.heal = this.buttonsDisable.heal;
+                this.buttonsBackup.useShield = this.buttonsDisable.useShield;
+                this.buttonsPaused = true;
+                this.disableActions();
+            },
+            resumeActions: function() {
+                this.buttonsDisable.attack = this.buttonsBackup.attack;
+                this.buttonsDisable.specialAttack = this.buttonsBackup.specialAttack;
+                this.buttonsDisable.heal = this.buttonsBackup.heal;
+                this.buttonsDisable.useShield = this.buttonsBackup.useShield;
+                this.buttonsPaused = false;
             },
             endGame: function() {
                 this.disableActions();
@@ -285,21 +326,35 @@ window.addEventListener("load", function(event) {
                         message: this.wrapName(this.hero.name)
                             + ' is exhausted... '
                     });
-                    vm.buttonsDisable.attack = true;
-                    vm.buttonsDisable.specialAttack = true;
+                    if (vm.buttonsPaused) {
+                        vm.buttonsBackup.attack = true;
+                        vm.buttonsBackup.specialAttack = true;
+                    } else {
+                        vm.buttonsDisable.attack = true;
+                        vm.buttonsDisable.specialAttack = true;
+                    }
                 } else if (value<vm.hero.consumptionSpecial) {
                     vm.logs.unshift({
                         side: 'hero',
                         message: this.wrapName(this.hero.name)
                             + ' is tired... '
                     });
-                    vm.buttonsDisable.specialAttack = true;
+                    if (vm.buttonsPaused) {
+                        vm.buttonsBackup.specialAttack = true;
+                    } else {
+                        vm.buttonsDisable.specialAttack = true;
+                    }
                 } else {
                     if (value > 100) {
                         vm.hero.energy = 100;
                     }
-                    vm.buttonsDisable.attack = false;
-                    vm.buttonsDisable.specialAttack = false;
+                    if (vm.buttonsPaused) {
+                        vm.buttonsBackup.attack = false;
+                        vm.buttonsBackup.specialAttack = false;
+                        } else {
+                        vm.buttonsDisable.attack = false;
+                        vm.buttonsDisable.specialAttack = false;
+                    }
                 }
             },
             'monster.energy': function(value) {
