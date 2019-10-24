@@ -59,7 +59,7 @@
                 <button type="button" class="btn btn-warning" @click="heroSpecialAttack" :disabled="buttonsDisable.specialAttack">Special attack</button>
                 <button type="button" class="btn btn-success" @click="heroHeal" :disabled="buttonsDisable.heal">Heal</button>
                 <button type="button" class="btn btn-info" @click="heroUseShield" :disabled="buttonsDisable.useShield">Use shield</button>
-                <button type="button" class="btn btn-secondary" @click="giveUp" :disabled="buttonsDisable.giveUp">Give up</button>
+                <button type="button" class="btn btn-secondary" @click="restartGame" :disabled="buttonsDisable.restart">Restart</button>
         </div>
         <div class="control col" v-else>
                 <button type="button" class="btn btn-success" @click="startGame">Start new game</button>

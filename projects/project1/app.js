@@ -12,14 +12,14 @@ window.addEventListener("load", function(event) {
                 specialAttack: false,
                 heal: false,
                 useShield: false,
-                giveUp: false
+                restart: false
             },
             buttonsBackup: {
                 attack: false,
                 specialAttack: false,
                 heal: false,
                 useShield: false,
-                giveUp: false
+                restart: false
             },
             hero: {
                 name: 'Samwise Gamgee',
@@ -187,7 +187,7 @@ window.addEventListener("load", function(event) {
                     this.monster.energy += this.monster.rest;
                 }
             },
-            giveUp: function() {
+            restartGame: function() {
                 this.hero.health = 100;
                 this.hero.energy = 100;
                 this.hero.potions = 3;
