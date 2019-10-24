@@ -5,23 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Project1</title>
-    <script src="../../dist/vue.js"></script>
-    <script src="./app.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="../../dist/vue.js"></script>
+    <script src="./app.js"></script>
 </head>
 <body>
 <div id="app" class="container">
     <div class="row justify-content-md-center">
         <div class="status col col-lg-2" v-model="hero">
             <div class="label">
-                Hero: <span class="name">{{ hero.name }}</span>
+                <template v-if="winner === 'monster'"><strike>Hero: <span class="name">{{ hero.name }}</span></strike></template>
+                <template v-else>Hero: <span class="name">{{ hero.name }}</span></template>
+                <span v-if="inBattle">in Battle</span>
             </div>
             <div class="row">
                 <div class="col">
                     <div class="progress">
-                        <div class="progress-bar health" :style="heroHealth">
+                        <div class="progress-bar progress-bar-danger health" :style="heroHealth">
                                 {{ hero.health }}
                         </div>
                     </div>
@@ -30,7 +32,7 @@
             <div class="row">
                 <div class="col">
                     <div class="progress">
-                        <div class="progress-bar energy" :style="heroEnergy">
+                        <div class="progress-bar progress-bar-info energy" :style="heroEnergy">
                                 {{ hero.energy }}
                         </div>
                     </div>
@@ -41,7 +43,8 @@
             <div class="row">
                 <div class="col">
                     <div class="label" v-model="monster">
-                            Monster: <span class="name">{{ monster.name }}</span>
+                            <template v-if="winner === 'hero'"><strike>Monster: <span class="name">{{ monster.name }}</span></strike></template>
+                            <template v-else>Monster: <span class="name">{{ monster.name }}</span></template>
                     </div>
                 </div>
             </div>
@@ -78,7 +81,7 @@
         </div>
     </div>
     <div class="row justify-content-md-center">
-        <div id="logs" class="logs col">
+        <div id="logs" class="logs col" v-show="inGame">
             <div class="row" v-for="log in logs">
                 <div class="col">
                     <div v-if="log.side === 'hero'" class="alert alert-success">

@@ -3,6 +3,7 @@ window.addEventListener("load", function(event) {
         el: '#app',
         data : {
             inGame: false,
+            inBattle: false,
             winner: 'none',
             speed: 1000,
             buttonsDisable: {
@@ -32,6 +33,10 @@ window.addEventListener("load", function(event) {
                 consumptionHit: 10,
                 rest: 20
             },
+            potion: {
+                health: 50,
+                energy: 25
+            },
             logs: [
             ]
         },
@@ -44,27 +49,28 @@ window.addEventListener("load", function(event) {
                 });
             },
             heroAttack: function() {
-                if (this.hero.energy >= this.hero.consumptionHit ) {
+                if ( this.inBattle && this.hero.energy >= this.hero.consumptionHit) {
                     var hit = Math.round(Math.random() * this.hero.weapon);
                     this.logs.unshift({
                         side: 'hero',
                         message: this.wrapName(this.hero.name)
                             + ' is attacking ' + this.wrapName(this.monster.name)
-                            + ' and hits for ' + hit
+                            + (hit ? ' and hits for ' + hit : 'and misses')
                     });
                     this.hero.energy -= this.hero.consumptionHit;
                     this.monster.health -= hit;
+                    this.monsterAction();
                 }
-                this.monsterAction();
             },
             heroSpecialAttack: function(hit) {
-                if (this.hero.energy >= this.hero.consumptionSpecial) {
+                if (this.inBattle && this.hero.energy >= this.hero.consumptionSpecial) {
                     var hit = Math.round(Math.random() * this.hero.weapon * this.hero.special);
                     this.logs.unshift({
                         side: 'hero',
                         message: this.wrapName(this.hero.name)
                             + ' is attacking ' + this.wrapName(this.monster.name)
-                            + ' with a special move and hits for ' + hit
+                            + ' with a special move ' 
+                            + (hit ? 'and hits for ' + hit : ' and misses')
                     });
                     this.hero.energy -= this.hero.consumptionSpecial;
                     this.monster.health -= hit;
@@ -72,7 +78,7 @@ window.addEventListener("load", function(event) {
                 }
             },
             heroHeal: function() {
-                if (this.hero.potions) {
+                if (this.inBattle && this.hero.potions) {
                     this.hero.potions--;
                     this.logs.unshift({
                         side: 'hero',
@@ -80,28 +86,29 @@ window.addEventListener("load", function(event) {
                             + ' is drinking a healing potion... '
                             + (this.hero.potions ? this.hero.potions + ' only left' : ' Potions are over')
                     });
-                    this.hero.health = 100;
+                    this.hero.health += this.potion.health;
+                    this.hero.energy += this.potion.energy;
                 }
                 this.monsterAction();
             },
             heroUseShield: function() {
-                this.hero.shield = true;
-                this.logs.unshift({
-                    side: 'hero',
-                    message: this.wrapName(this.hero.name)
-                        + ' is hiding behind his shield...'
-                });
-                this.hero.energy += this.hero.rest;
-                if (this.hero.energy > 100) {
-                    this.hero.energy = 100;
+                if (this.inBattle) {
+                    this.hero.shield = true;
+                    this.logs.unshift({
+                        side: 'hero',
+                        message: this.wrapName(this.hero.name)
+                            + ' is hiding behind his shield...'
+                    });
+                    this.hero.energy += this.hero.rest;
+                    if (this.hero.energy > 100) {
+                        this.hero.energy = 100;
+                    }
+                    this.monsterAction();
                 }
-                this.monsterAction();
             },
             startGame: function() {
                 this.inGame = true;
-
-                var vm = this;
-
+                this.inBattle = true;
                 this.heroPrepare();
                 this.monsterLookAround();
             },
@@ -132,17 +139,19 @@ window.addEventListener("load", function(event) {
                 }, vm.speed);
             },
             monsterAction: function() {
-                var vm = this;
-                setTimeout(function() {
-                    if (vm.monster.energy >= vm.monster.consumptionHit) {
-                        vm.monsterAttack();
-                    } else {
-                        vm.monsterRest();
-                    }
-                }, vm.speed);
+                if (this.inBattle) {
+                    var vm = this;
+                    setTimeout(function() {
+                        if (vm.monster.energy >= vm.monster.consumptionHit) {
+                            vm.monsterAttack();
+                        } else {
+                            vm.monsterRest();
+                        }
+                    }, vm.speed);
+                }
             },
             monsterAttack: function() {
-                if (this.monster.energy > 0) {
+                if (this.inBattle && this.monster.energy > 0) {
                     var hit = Math.round(Math.random() * this.monster.weapon);
                     if (this.shield) {
                         hit = Math.round(hit/2);
@@ -152,19 +161,21 @@ window.addEventListener("load", function(event) {
                         side: 'monster',
                         message: this.wrapName(this.monster.name)
                             + ' is attacking ' + this.wrapName(this.hero.name)
-                            + ' and hits for ' + hit
+                            + (hit ? ' and hits for ' + hit : ' and misses')
                     });
                     this.monster.energy -= this.monster.consumptionHit;
                     this.hero.health -= hit;
                 }
             },
             monsterRest: function() {
-                this.logs.unshift({
-                    side: 'monster',
-                    message: this.wrapName(this.monster.name)
-                        + ' is resting... '
-                });
-                this.monster.energy += this.monster.rest;
+                if (this.inBattle) {
+                    this.logs.unshift({
+                        side: 'monster',
+                        message: this.wrapName(this.monster.name)
+                            + ' is resting... '
+                    });
+                    this.monster.energy += this.monster.rest;
+                }
             },
             giveUp: function() {
                 this.hero.health = 100;
@@ -173,8 +184,24 @@ window.addEventListener("load", function(event) {
                 this.monster.energy = 100;
                 this.logs = [];
                 this.inGame = false;
+                this.winner = 'none';
+                this.enableActions();
+            },
+            enableActions: function() {
+                this.buttonsDisable.attack = false;
+                this.buttonsDisable.specialAttack = false;
+                this.buttonsDisable.heal = false;
+                this.buttonsDisable.useShield = false;
+            },
+            disableActions: function() {
+                this.buttonsDisable.attack = true;
+                this.buttonsDisable.specialAttack = true;
+                this.buttonsDisable.heal = true;
+                this.buttonsDisable.useShield = true;
             },
             endGame: function() {
+                this.disableActions();
+                this.inBattle = false;
                 if (this.winner === 'hero') {
                     this.logs.unshift({
                         side: 'hero',
@@ -183,6 +210,7 @@ window.addEventListener("load", function(event) {
                             + this.wrapName(this.monster.name)
                             + ' was defeated!'
                     });
+                    this.monster.health = 0;
                 } else {
                     this.logs.unshift({
                         side: 'monster',
@@ -191,6 +219,7 @@ window.addEventListener("load", function(event) {
                             + this.wrapName(this.monster.name) 
                             + ' won the battle...'
                     });
+                    this.hero.health = 0;
                 }
             },
             wrapName: function(name) {
@@ -222,23 +251,24 @@ window.addEventListener("load", function(event) {
             }
         },
         watch: {
-            inGame: function(value) {
-                var vm = this;
-                if(value) {
-                    
-                } else {
-                    
-                }
-            },
             'hero.health': function(value) {
                 var vm = this;
+                if (!vm.inBattle) {
+                    return;
+                }
                 if (value<=0) {
                     vm.winner = 'monster';
                     vm.endGame();
                 }
+                if (value>100) {
+                    vm.hero.health = 100;
+                }
             },
             'monster.health': function(value) {
                 var vm = this;
+                if (!vm.inBattle) {
+                    return;
+                }
                 if (value<=0) {
                     vm.winner = 'hero';
                     vm.endGame();
@@ -246,6 +276,9 @@ window.addEventListener("load", function(event) {
             },
             'hero.energy': function(value) {
                 var vm = this;
+                if (!vm.inBattle) {
+                    return;
+                }
                 if (value<vm.hero.consumptionHit) {
                     vm.logs.unshift({
                         side: 'hero',
@@ -262,18 +295,27 @@ window.addEventListener("load", function(event) {
                     });
                     vm.buttonsDisable.specialAttack = true;
                 } else {
+                    if (value > 100) {
+                        vm.hero.energy = 100;
+                    }
                     vm.buttonsDisable.attack = false;
                     vm.buttonsDisable.specialAttack = false;
                 }
             },
             'monster.energy': function(value) {
                 var vm = this;
-                if (value<=0) {
+                if (vm.inBattle && value<=0) {
                     vm.logs.unshift({
                         side: 'monster',
                         message: this.wrapName(this.monster.name)
                             + ' is exhausted... '
                     });
+                }
+            },
+            'hero.potions': function(value) {
+                var vm = this;
+                if (!value) {
+                    vm.buttonsDisable.heal = true;
                 }
             }
         }
