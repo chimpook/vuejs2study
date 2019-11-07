@@ -1,20 +1,32 @@
 <template>
     <li class="list-group-item">
-        Server #{{ index }} is {{ status }} <button @click="toggleServer">Toggle server</button>
+        Server #{{ server.id }} <span v-bind:style="{color: actualColor, 'font-weight': 'bold'}">{{server.name}}</span> 
+        is {{ server.status }} <button @click="toggleServer">Toggle server</button>
     </li>
 </template>
 
 <script>
     export default {
+        props: ['server'],
         data: function() {
             return {
-                name: '',
-                status: 'Off'
+                server: {
+                    id: 0,
+                    name: 'Abstract Server',
+                    color: 'black',
+                    status: 'Off'
+                },
+                inactiveColor: 'lightgray'
             }
         },
         methods: {
             toggleServer() {
-                this.status = (this.status == 'Off' ? 'On' : 'Off');
+                this.server.status = (this.server.status == 'Off' ? 'On' : 'Off');
+            }
+        },
+        computed: {
+            actualColor: function() {
+                return this.server.status === 'On' ? this.server.color : this.inactiveColor;
             }
         }
     }
