@@ -3,6 +3,7 @@
         <h3>You may view the User Details here</h3>
         <p>Many Details</p>
         <p>User Name: {{ switchName() }}</p>
+        <p>User Age: {{ userAge }}</p>
         <button @click="resetName">Reset Name</button>
         <button @click="resetFn()">Another reset Name</button>
     </div>
@@ -12,7 +13,8 @@
     export default {
         props: {
             myName: String,
-            resetFn: Function
+            resetFn: Function,
+            userAge: Number
             /*
             mySecondName: [String, Array],
             myAge: {
