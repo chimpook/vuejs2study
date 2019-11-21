@@ -14,7 +14,9 @@
             };
         },
         destroyed() {
+            /* eslint-disable no-console */
             console.log('Destroyed!');
+            /* eslint-enable no-console */
         }
     }
 </script>
