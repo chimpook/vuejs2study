@@ -17,6 +17,16 @@
             /* eslint-disable no-console */
             console.log('Destroyed!');
             /* eslint-enable no-console */
+        },
+        activated() {
+            /* eslint-disable no-console */
+            console.log('Activated!');
+            /* eslint-enable no-console */
+        },
+        deactivated() {
+            /* eslint-disable no-console */
+            console.log('Deactivated!');
+            /* eslint-enable no-console */
         }
     }
 </script>
