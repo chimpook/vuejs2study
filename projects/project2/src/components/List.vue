@@ -26,7 +26,7 @@ export default {
     },
     created() {
         eventBus.$on('quoteWasAdded', (quote) => {
-            this.list.push(quote);
+            this.list.push(quote ? quote : "Empty quote");
         });
     }
 }

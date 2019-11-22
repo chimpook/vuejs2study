@@ -6,7 +6,7 @@
             <div class="col-6">
             <h3>Quote</h3>
             <!--<textarea name="quotearea" id="quotearea" cols="30" rows="10"></textarea>-->
-            <textarea class="form-control" name="quotearea" id="quotearea"></textarea>
+            <textarea class="form-control" name="quotearea" id="quotearea" v-model="content"></textarea>
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
@@ -26,9 +26,14 @@
 import { eventBus } from '../main.js';
 
 export default {
+    data: function() {
+        return {
+            content: ""
+        };
+    },
     methods: {
         addQuote() {
-            eventBus.addQuote('QQ');
+            eventBus.addQuote(this.content);
         }
     }
 }
