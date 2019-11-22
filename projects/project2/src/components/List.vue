@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { eventBus } from '../main.js';
 import Quote from './Quote.vue';
 
 export default {
@@ -22,6 +23,11 @@ export default {
     },
     components: {
         appQuote: Quote
+    },
+    created() {
+        eventBus.$on('quoteWasAdded', (quote) => {
+            this.list.push(quote);
+        });
     }
 }
 </script>

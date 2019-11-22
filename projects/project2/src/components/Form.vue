@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col"></div>
                 <div class="col">
-                <button class="btn btn-primary">Add Quote</button>
+                <button class="btn btn-primary" @click="addQuote">Add Quote</button>
                 </div>
                 <div class="col"></div>
             </div>
@@ -22,8 +22,15 @@
 </template>
 
 <script>
+
+import { eventBus } from '../main.js';
+
 export default {
-    
+    methods: {
+        addQuote() {
+            eventBus.addQuote('QQ');
+        }
+    }
 }
 </script>
 

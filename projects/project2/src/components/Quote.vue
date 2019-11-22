@@ -1,5 +1,5 @@
 <template>
-    <div class="col-3 quote">
+    <div class="quote">
         <slot></slot>
     </div>
 
@@ -22,6 +22,7 @@
   /*font-family: 'Lobster', cursive;*/
   font-family: 'Marck Script', cursive;
   font-size: 16pt;
+  width: 22%; min-height: 24px;
 }
 
 </style>
