@@ -2,30 +2,30 @@
     
     <div class="form-group">
         <div class="row">
-            <div class="col-3">
-            <div class="quote">
-                Just a Quote to start with something
-            </div>
-            </div>
+            <app-quote v-for="(item,index) in list" v-bind:key="index">{{ item }}</app-quote>
         </div>
     </div>
 
 </template>
 
 <script>
+import Quote from './Quote.vue';
+
 export default {
-    
+    data: function() {
+        return {
+            list: [
+                "Just a Quote to start with something",
+                "Just a Quote to start with something else"
+            ]
+        };
+    },
+    components: {
+        appQuote: Quote
+    }
 }
 </script>
 
 <style scoped>
-
-.quote {
-  border: 1px solid #ccc;
-  padding: 20px;
-  box-shadow: 1px 2px #ccc;
-  border-radius: 4px;
-  margin: 12px;
-}
 
 </style>
