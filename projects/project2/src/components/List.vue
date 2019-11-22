@@ -17,8 +17,7 @@ export default {
         return {
             maxQuotes: 10,
             list: [
-                "Just a Quote to start with something",
-                "Just a Quote to start with something else"
+                "Just a Quote to start with something"
             ]
         };
     },
@@ -34,6 +33,7 @@ export default {
         });
         eventBus.$on('quoteWasDropped', (index) => {
             this.list.splice(index, 1);
+            eventBus.numberQuotes = this.list.length;
         });
     }
 }
