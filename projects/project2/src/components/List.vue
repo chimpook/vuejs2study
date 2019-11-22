@@ -17,7 +17,7 @@ export default {
         return {
             maxQuotes: 10,
             list: [
-                "Just a Quote to start with something"
+                "Just a Quote to start with something 1"
             ]
         };
     },

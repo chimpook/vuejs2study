@@ -2,7 +2,6 @@
     <div class="quote" @click="dropQuote">
         <slot></slot>
     </div>
-
 </template>
 
 <script>
@@ -30,7 +29,7 @@ import { eventBus } from '../main'
   /*font-family: 'Lobster', cursive;*/
   font-family: 'Marck Script', cursive;
   font-size: 16pt;
-  width: 22%; min-height: 24px;
+  width: 22.5%; min-height: 24px;
 }
 
 </style>

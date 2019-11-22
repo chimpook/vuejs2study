@@ -3,9 +3,9 @@
     <div class="form-group">
         <div class="row">
             <div class="col-12">
-            <h2>Quotes added</h2>
+            <h3>Quotes added</h3>
             <div class="progress">
-                <div class="progress-bar" role="progressbar" v-bind:style="{ width: width }" aria-valuenow="2" aria-valuemin="0" aria-valuemax="10">
+                <div class="progress-bar bg-info" role="progressbar" v-bind:style="{ width: width }" aria-valuenow="2" aria-valuemin="0" aria-valuemax="10">
                     {{ num }}/{{ max }}
                 </div>
             </div>
@@ -44,5 +44,7 @@ export default {
 </script>
 
 <style scoped>
-
+    h3 {
+        font-weight: bolder;
+    }
 </style>
