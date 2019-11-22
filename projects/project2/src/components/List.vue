@@ -21,6 +21,11 @@ export default {
             ]
         };
     },
+    methods: {
+        dropQuote() {
+            alert(1);
+        }
+    },
     components: {
         appQuote: Quote
     },

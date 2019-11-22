@@ -1,5 +1,5 @@
 <template>
-    <div class="quote">
+    <div class="quote" @click="dropQuote">
         <slot></slot>
     </div>
 
@@ -7,7 +7,11 @@
 
 <script>
     export default {
-        
+        methods: {
+            dropQuote() {
+                alert(1);
+            }
+        }
     }
 </script>
 
