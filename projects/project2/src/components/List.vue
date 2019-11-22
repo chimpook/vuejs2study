@@ -2,7 +2,7 @@
     
     <div class="form-group">
         <div class="row">
-            <app-quote v-for="(item,index) in list" v-bind:key="index">{{ item }}</app-quote>
+            <app-quote v-for="(item,index) in list" v-bind:key="index" v-bind:index="index">{{ item }}</app-quote>
         </div>
     </div>
 
@@ -32,6 +32,9 @@ export default {
     created() {
         eventBus.$on('quoteWasAdded', (quote) => {
             this.list.push(quote ? quote : "Empty quote");
+        });
+        eventBus.$on('quoteWasDropped', (index) => {
+            this.list.splice(index, 1);
         });
     }
 }

@@ -7,6 +7,9 @@ export const eventBus = new Vue({
   methods: {
     addQuote(quote) {
       this.$emit('quoteWasAdded', quote);
+    },
+    dropQuote(index) {
+      this.$emit('quoteWasDropped', index);
     }
   }
 });

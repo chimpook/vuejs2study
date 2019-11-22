@@ -6,10 +6,14 @@
 </template>
 
 <script>
+import { eventBus } from '../main'
     export default {
+        props: [
+            'index'
+        ],
         methods: {
             dropQuote() {
-                alert(1);
+                eventBus.dropQuote(this.index);
             }
         }
     }
