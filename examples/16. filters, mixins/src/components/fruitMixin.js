@@ -12,5 +12,10 @@ export const fruitMixin = {
                 return element.match(this.filterText);
             });
         }
+    },
+    created() {
+            /* eslint-disable no-console */
+            console.log('Mixin created.');
+            /* eslint-enable no-console */
     }
 }

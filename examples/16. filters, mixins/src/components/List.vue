@@ -11,7 +11,12 @@
 <script>
     import { fruitMixin } from './fruitMixin';
     export default {
-        mixins: [ fruitMixin ]
+        mixins: [ fruitMixin ],
+        created() {
+            /* eslint-disable no-console */
+            console.log('List created.');
+            /* eslint-enable no-console */
+        }
     }
 </script>
 

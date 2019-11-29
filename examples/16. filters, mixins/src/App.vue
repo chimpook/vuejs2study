@@ -40,7 +40,14 @@
                 });
             }
         },
-        mixins: [ fruitMixin ]
+        mixins: [ fruitMixin ],
+        created() {
+            // Mixins created() will be executed firstly
+            // then - components created()
+            /* eslint-disable no-console */
+            console.log('App created.');
+            /* eslint-enable no-console */
+        }
     }
 </script>
 
