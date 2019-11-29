@@ -17,13 +17,12 @@
 </template>
 
 <script>
-    import List from './components/List.vue';
+    import List from './components/List';
+    import { fruitMixin } from './components/fruitMixin';
     export default {
         data() {
             return {
-                text: 'Hello kitty!',
-                fruits: ['Apple', 'Banana', 'Mango', 'Melon'],
-                filterText: ''
+                text: 'Hello kitty!'
             }
         },
         components: {
@@ -34,14 +33,14 @@
                 return value.toUpperCase();
             }
         },
-        // better solution tham filter - recalculates only when changed
         computed: {
             filteredFruits() {
                 return this.fruits.filter((element) => {
                     return element.match(this.filterText);
                 });
             }
-        }
+        },
+        mixins: [ fruitMixin ]
     }
 </script>
 
