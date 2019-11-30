@@ -227,11 +227,11 @@
         transition: opacity 1s;
         /*opacity: 1;*/
     }
-
+/*
     .fade-leave {
-        /* opacity: 1;*/
+        opacity: 1;
     }
-
+*/
     .fade-leave-active {
         transition: opacity 1s;
         opacity: 0;
@@ -246,11 +246,11 @@
         animation: slide-in 1s ease-out forwards;
         transition: opacity .5s;
     }
-
+/*
     .slide-leave {
 
     }
-
+*/
     .slide-leave-active {
         animation: slide-out 1s ease-out forwards;
         transition: opacity 3s;
