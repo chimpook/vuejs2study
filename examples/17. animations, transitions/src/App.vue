@@ -109,18 +109,39 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                <button 
+                    @click="selectedComponent == 'app-success-alert' ? selectedComponent = 'app-danger-alert' : selectedComponent = 'app-success-alert'"
+                class="btn btn-primary">Toggle my components</button>
+                <br>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                <transition name="fade" mode="out-in">
+                    <component :is="selectedComponent"></component>
+                </transition>
+            </div>
+        </div>
+
     </div>
 </template>
 
 <script>
+    import DangerAlert from './components/DangerAlert';
+    import SuccessAlert from './components/SuccessAlert';
     export default {
         data() {
             return {
                 show: [true, true, true, true, true],
                 alertAnimation: 'fade',
                 load: true,
-                elementWidth: 100
+                elementWidth: 100,
+                selectedComponent: 'app-success-alert'
             }
+        },
+        components: {
+            appDangerAlert: DangerAlert,
+            appSuccessAlert: SuccessAlert
         },
         methods: {
             toggle(index) {
