@@ -123,6 +123,32 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                <button class="btn btn-success" @click="addItem">Add element</button>
+                <br>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                <!--
+                    One important thing: 
+                        <transition> is not rendered to the DOM,
+                        <transision-group> does render a new HTML Tag!
+                        By default it will be a <span>, you can overwrite this
+                        by setting <transition-group tag="TAG">.
+                    -->
+                <ul class="list-group">
+                    <transition-group name="slide">
+                        <li class="list-group-item" 
+                            v-for="(number, index) in numbers" 
+                            v-bind:key="number"
+                            @click="removeItem(index)"
+                            style="cursor: pointer"
+                            >{{ number }}</li>
+                    </transition-group>
+                </ul>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -136,7 +162,9 @@
                 alertAnimation: 'fade',
                 load: true,
                 elementWidth: 100,
-                selectedComponent: 'app-success-alert'
+                selectedComponent: 'app-success-alert',
+                numbers: [1, 2, 3, 4, 5],
+                nextIndex: 6
             }
         },
         components: {
@@ -214,6 +242,14 @@
                 console.log("leaveCancelled");
                 /* eslint-enable no-console */
             },
+            addItem() {
+                const pos = Math.floor(Math.random() * this.numbers.length);
+                // this.numbers.lenght better not to use for generating of the next value
+                this.numbers.splice(pos, 0, this.nextIndex++);
+            },
+            removeItem(index) {
+                this.numbers.splice(index, 1);
+            }
         }
     }
 </script>
@@ -255,6 +291,11 @@
         animation: slide-out 1s ease-out forwards;
         transition: opacity 3s;
         opacity: 0;
+        position: absolute; /* for more smoth removing elements from the list */
+    }
+
+    .slide-move {
+        transition: transform 1s;
     }
 
     @keyframes slide-in {
@@ -275,6 +316,10 @@
         to {
             transform: translateY(20px);
         }
+    }
+
+    .row:hover {
+        background-color: whitesmoke;
     }
 
 </style>
