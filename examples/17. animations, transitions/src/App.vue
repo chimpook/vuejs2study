@@ -86,6 +86,29 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                <button @click="load = !load" class="btn btn-primary">Load / Remove Element</button>
+                <br>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
+                <transition 
+                    @before-enter="beforeEnter"
+                    @enter="enter"
+                    @after-enter="afterEnter"
+                    @enter-cancelled="enterCancelled"
+
+                    @before-leave="beforeLeave"
+                    @leave="leave"
+                    @after-leave="afterLeave"
+                    @leave-cancelled="leaveCancelled"
+                    :css="false"
+                >
+                    <div v-if="load" style="width: 300px; height: 100px; background-color: lightgreen;"></div>
+                </transition>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -94,13 +117,82 @@
         data() {
             return {
                 show: [true, true, true, true, true],
-                alertAnimation: 'fade'
+                alertAnimation: 'fade',
+                load: true,
+                elementWidth: 100
             }
         },
         methods: {
             toggle(index) {
                 this.$set(this.show, index, !this.show[index]);
-            }
+            },
+            beforeEnter(el) {
+                /* eslint-disable no-console */
+                //console.log('beforeEnter!');
+                console.log("beforeEnter");
+                /* eslint-enable no-console */
+                this.elementWidth = 100;
+                el.style.width = this.elementWidth + 'px';
+            },
+            enter(el, done) {
+                /* eslint-disable no-console */
+                console.log("enter");
+                /* eslint-enable no-console */
+                let round = 1;
+                const interval = setInterval(() => {
+                    el.style.width = (this.elementWidth + round * 10) + 'px';
+                    round++;
+                    if (round > 20) {
+                        clearInterval(interval);
+                        done();
+                    }
+                }, 20);
+                //done();
+            },
+            afterEnter(/*el*/) {
+                /* eslint-disable no-console */
+                console.log("afterEnter");
+                /* eslint-enable no-console */
+            },
+            enterCancelled(/*el*/) {
+                /* eslint-disable no-console */
+                console.log("enterCancelled");
+                /* eslint-enable no-console */
+            },
+            beforeLeave(el) {
+                /* eslint-disable no-console */
+                //console.log('beforeEnter!');
+                console.log("beforeLeave");
+                /* eslint-enable no-console */
+                this.elementWidth = 300;
+                el.style.width = this.elementWidth + 'px';
+            },
+            leave(el, done) {
+                /* eslint-disable no-console */
+                console.log("leave");
+                /* eslint-enable no-console */
+                let round = 1;
+                const interval = setInterval(() => {
+                    el.style.width = (this.elementWidth - round * 10) + 'px';
+                    round++;
+                    if (round > 20) {
+                        clearInterval(interval);
+                        done();
+                    }
+                }, 20);
+                //done();
+            },
+            afterLeave(/*el*/) {
+                /* eslint-disable no-console */
+                console.log("afterLeave");
+                /* eslint-enable no-console */
+            },
+            leaveCancelled(/*el*/) {
+                /* eslint-disable no-console */
+                //console.log(arguments.callee.toString().match(/function ([^\(]+)/)[1]);
+                console.log("leaveCancelled");
+                /* eslint-enable no-console */
+            },
         }
     }
 </script>
