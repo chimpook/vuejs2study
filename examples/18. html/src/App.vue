@@ -53,7 +53,7 @@
                             // data - is a promise, we can not use it like this
                             // const data = response.json();
                             /* eslint-disable no-console */
-                            // console.log(data);
+                            //console.log(data);
                             /* eslint-enable no-console */
 
                             return response.json();
@@ -65,7 +65,7 @@
                         // Because data is promise, we have to use "then" again
                         .then(data => {
                             /* eslint-disable no-console */
-                            console.log(data);
+                            // console.log(data);
                             /* eslint-enable no-console */
                             const resultArray = [];
                             for (let key in data) {
