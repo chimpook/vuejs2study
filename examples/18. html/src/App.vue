@@ -31,24 +31,27 @@
                     username: '',
                     email: ''
                 },
-                users: []
+                users: [],
+                resource: {}
             };
         },
         methods: {
             submit() {
-                this.$http.post('', this.user)
-                        .then(response => {
-                            /* eslint-disable no-console */
-                            console.log(response);
-                            /* eslint-enable no-console */
-                        }, error => {
-                            /* eslint-disable no-console */
-                            console.log(error);
-                            /* eslint-enable no-console */
-                        });
+
+//                this.$http.post('', this.user)
+//                        .then(response => {
+//                            /* eslint-disable no-console */
+//                            console.log(response);
+//                            /* eslint-enable no-console */
+//                       }, error => {
+//                            /* eslint-disable no-console */
+//                            console.log(error);
+//                            /* eslint-enable no-console */
+//                        });
+                this.resource.save({}, this.user);
             },
             fetchData() {
-                this.$http.get('')
+                this.$http.get('data.json')
                         .then(response => {
                             // data - is a promise, we can not use it like this
                             // const data = response.json();
@@ -74,6 +77,9 @@
                             this.users = resultArray;
                         });
             }
+        },
+        created() {
+            this.resource = this.$resource('data.json');
         }
     }
 </script>

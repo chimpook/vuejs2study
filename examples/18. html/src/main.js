@@ -3,7 +3,7 @@ import App from './App.vue'
 import VueResource from 'vue-resource';
 
 Vue.use(VueResource);
-Vue.http.options.root = 'https://vuejs-http-bbf77.firebaseio.com/data.json';
+Vue.http.options.root = 'https://vuejs-http-bbf77.firebaseio.com';
 Vue.http.interceptors.push((request, next) => {
   /* eslint-disable no-console */
   console.log(request);
