@@ -36,7 +36,7 @@
         },
         methods: {
             submit() {
-                this.$http.post('https://vuejs-http-bbf77.firebaseio.com/data.json', this.user)
+                this.$http.post('', this.user)
                         .then(response => {
                             /* eslint-disable no-console */
                             console.log(response);
@@ -48,7 +48,7 @@
                         });
             },
             fetchData() {
-                this.$http.get('https://vuejs-http-bbf77.firebaseio.com/data.json')
+                this.$http.get('')
                         .then(response => {
                             // data - is a promise, we can not use it like this
                             // const data = response.json();
