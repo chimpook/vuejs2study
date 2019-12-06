@@ -13,7 +13,7 @@
         <router-link 
             class="btn btn-success"
             tag="button" 
-            :to="{ name: 'userEdit', params: { id: $route.params.id }}"
+            :to="{ name: 'userEdit', params: { id: $route.params.id }, query: { locale: 'en', q: 100 } }"
             >
             Edit user
         </router-link>
