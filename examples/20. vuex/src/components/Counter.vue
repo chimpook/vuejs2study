@@ -9,10 +9,12 @@
 export default {
     methods: {
         increment() {
-            this.$emit('update', 1);
+            //this.$emit('update', 1);
+            this.$store.state.counter++;
         },
         decrement() {
-            this.$emit('update', -1);
+            //this.$emit('update', -1);
+            this.$store.state.counter--;
         }
     }
 }
