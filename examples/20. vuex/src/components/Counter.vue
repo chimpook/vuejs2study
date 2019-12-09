@@ -6,7 +6,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
+/*
     methods: {
         increment() {
             //this.$emit('update', 1);
@@ -17,6 +19,14 @@ export default {
             this.$store.state.counter--;
         }
     }
+*/
+    methods: {
+        ...mapActions([
+            'increment',
+            'decrement'
+        ])
+    }
+
 }
 </script>
 
