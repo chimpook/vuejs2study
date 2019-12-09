@@ -10,6 +10,8 @@
         <hr>
         <!-- <app-counter @update="counter += $event"></app-counter>-->
         <app-counter></app-counter>
+        <hr>
+        <app-another-counter></app-another-counter>
       </div>
     </div>
   </div>
@@ -20,6 +22,7 @@
 import Counter from './components/Counter';
 import Result from './components/Result';
 import AnotherResult from './components/AnotherResult';
+import AnotherCounter from './components/AnotherCounter';
 
 export default {
 /*  
@@ -32,7 +35,8 @@ export default {
   components: {
     appCounter: Counter,
     appResult: Result,
-    appAnotherResult: AnotherResult
+    appAnotherResult: AnotherResult,
+    appAnotherCounter: AnotherCounter
   }
 }
 </script>
