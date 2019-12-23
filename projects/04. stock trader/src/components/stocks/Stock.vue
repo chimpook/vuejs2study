@@ -1,3 +1,18 @@
 <template>
-    <h1>The Stock Component</h1>
+    <div class="col-sm-6 col-md-4 mb-3">
+        <div class="card mt-3">
+            <div class="card-header text-white bg-success">
+                    NAME
+                    <small>(Price: PRICE)</small>
+            </div>
+            <div class="card-body">
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="Quantity">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
