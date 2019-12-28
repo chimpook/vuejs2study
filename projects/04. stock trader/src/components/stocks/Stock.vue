@@ -41,7 +41,6 @@ export default {
             };
             /* eslint-disable no-console */
             console.log(order);
-            /* eslint-enable no-console */
             this.quantity = 0;
         }
     }
