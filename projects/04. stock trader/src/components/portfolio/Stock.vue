@@ -1,7 +1,7 @@
 <template>
     <div class="col-sm-6 col-md-4 mt-3">
         <div class="card">
-            <div class="card-header text-white bg-success">
+            <div class="card-header text-white bg-info">
                     {{ stock.name }}
                     <small>(Price: {{ stock.price }} || Quantity: {{ stock.quantity }} )</small>
             </div>
@@ -44,6 +44,7 @@ export default {
                 quantity: this.quantity
             };
             this.sellStock(order);
+            this.quantity = 0;
         }
     }
 }
