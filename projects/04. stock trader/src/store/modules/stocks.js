@@ -11,14 +11,18 @@ const mutations = {
     'RND_STOCKS' (state) {
         /* eslint-disable no-console */
         console.log(state);
+    },
+    'BUY_STOCK' (state) {
+        /* eslint-disable no-console */
+        console.log(state);
     }
 };
 
 const actions = {
     buyStock: ({ commit }, order) => {
         /* eslint-disable no-console */
-        console.log(order);
-        commit();
+        //console.log(order);
+        commit('BUY_STOCK', order);
     },
     initStocks: ({ commit }) => {
         commit('SET_STOCKS', stocks);

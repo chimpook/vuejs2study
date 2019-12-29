@@ -13,7 +13,7 @@
                             class="btn btn-outline-secondary" 
                             type="button" 
                             @click="buyStock"
-                            :disabled="this.quantity <= 0 || !Number.isInteger(quantity)"
+                            :disabled="this.quantity <= 0 || !Number.isInteger(Number(quantity))"
                             >
                             Buy
                         </button>
@@ -41,6 +41,7 @@ export default {
             };
             /* eslint-disable no-console */
             console.log(order);
+            this.$store.dispatch('buyStock', order);
             this.quantity = 0;
         }
     }
