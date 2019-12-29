@@ -11,6 +11,9 @@ const mutations = {
     'RND_STOCKS' (state) {
         /* eslint-disable no-console */
         console.log(state);
+        state.stocks.forEach(stock => {
+            stock.price = Math.round(stock.price * (0.5 + Math.random()));
+        });
     },
     'BUY_STOCK' (state) {
         /* eslint-disable no-console */
@@ -28,7 +31,7 @@ const actions = {
         commit('SET_STOCKS', stocks);
     },
     randomizeStocks: ({ commit }) => {
-        commit('RND_STOCKS');
+        commit('RND_STOCKS', stocks);
     }
 };
 
