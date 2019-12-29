@@ -7,15 +7,21 @@
             </div>
             <div class="card-body">
                 <div class="input-group">
-                    <input type="number" class="form-control" placeholder="Quantity" v-model="quantity">
+                    <input 
+                        type="number" 
+                        class="form-control" 
+                        placeholder="Quantity" 
+                        v-model="quantity"
+                        :class="{ 'border-danger': insufficientFunds}"
+                        >
                     <div class="input-group-append">
                         <button 
                             class="btn btn-outline-secondary" 
                             type="button" 
                             @click="buyStock"
-                            :disabled="this.quantity <= 0 || !Number.isInteger(Number(quantity))"
+                            :disabled="insufficientFunds || this.quantity <= 0 || !Number.isInteger(Number(quantity))"
                             >
-                            Buy
+                            {{ insufficientFunds ? 'Not enough Funds' : 'Buy' }}
                         </button>
                     </div>
                 </div>
@@ -30,6 +36,14 @@ export default {
     data() {
         return {
             quantity: 0
+        }
+    },
+    computed: {
+        funds() {
+            return this.$store.getters.funds;
+        },
+        insufficientFunds() {
+            return this.quantity * this.stock.price > this.funds;
         }
     },
     methods: {
