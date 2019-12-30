@@ -20,7 +20,7 @@
                 Save & Load <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" :class="{show: isDropdownOpen}">
-                <li class="nav-item"><a href="#" class="nav-link">Save</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" @click="saveData">Save</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Load</a></li>
             </ul>
         </li>
@@ -48,6 +48,16 @@ export default {
     ]),
     endDay() {
       this.randomizeStocks();
+    },
+    saveData() {
+      const data = {
+        funds: this.$store.getters.funds,
+        stockPortfolio: this.$store.getters.stockPortfolio,
+        stocks: this.$store.getters.stocks
+      };
+      this.$http.put('data.json', data);
+
+
     }
   }
 }

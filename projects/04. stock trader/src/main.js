@@ -11,6 +11,12 @@ Vue.config.productionTip = false
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
+/**
+ * 1. go to https://console.firebase.google.com/
+ * 2. create Realtime database
+ * 3. go to "Rules" and set write and read both to true
+ * 4. go to "Data" and copy link to database
+ */
 Vue.http.options.root = 'https://vuejs-stock-trader-f52fd.firebaseio.com/';
 
 Vue.filter('currency', (value) => {
