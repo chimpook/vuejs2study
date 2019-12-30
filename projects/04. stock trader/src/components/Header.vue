@@ -21,7 +21,7 @@
             </a>
             <ul class="dropdown-menu" :class="{show: isDropdownOpen}">
                 <li class="nav-item"><a href="#" class="nav-link" @click="saveData">Save</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Load</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" @click="loadData">Load</a></li>
             </ul>
         </li>
     </ul>
@@ -43,9 +43,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions([
-      'randomizeStocks'
-    ]),
+    ...mapActions({
+      randomizeStocks: 'randomizeStocks',
+      fetchData: 'loadData'
+    }),
     endDay() {
       this.randomizeStocks();
     },
@@ -56,8 +57,9 @@ export default {
         stocks: this.$store.getters.stocks
       };
       this.$http.put('data.json', data);
-
-
+    },
+    loadData() {
+      this.fetchData();
     }
   }
 }
