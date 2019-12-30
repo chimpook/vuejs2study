@@ -12,7 +12,8 @@ const mutations = {
         /* eslint-disable no-console */
         console.log(state);
         state.stocks.forEach(stock => {
-            stock.price = Math.round(stock.price * (0.5 + Math.random()));
+            const delta = (Math.random() > 0.5 ? 1 : -1) * Math.random() * stock.price * 0.1;
+            stock.price = Math.round(Math.abs(stock.price + delta));
         });
     },
     'BUY_STOCK' (state) {
